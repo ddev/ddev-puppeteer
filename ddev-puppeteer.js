@@ -46,7 +46,6 @@ function web_install() {
 
         await page.waitForSelector('[id="edit-site-name"]');
         await page.type('[id="edit-site-mail"]', 'admin@example.com');
-        await page.type('[id="edit-site-mail"]', 'admin@example.com');
         await page.type('[id="edit-account-name"]', 'admin');
         await page.type('[id="edit-account-pass-pass1"]', 'admin');
         await page.type('[id="edit-account-pass-pass2"]', 'admin');
