@@ -1,6 +1,8 @@
+// Do a simple Drupal 9 install
+
 // Must npm install async
 
-var site= "https://d9junk.ddev.site/";
+var site = "https://d9junk.ddev.site/";
 var sitedir = "/Users/rfay/workspace/d9junk"
 
 const puppeteer = require('puppeteer');
@@ -12,6 +14,18 @@ function execute(command, callback) {
     exec(command, function (error, stdout, stderr) {
         callback(stdout);
     });
+};
+
+function restart(callback) {
+    execute('ddev restart', function (result) {
+        exec('cd ' + sitedir + ' && ddev restart', function (error, stdout, stderr) {
+            console.log(stdout);
+            console.log(stderr);
+        });
+        callback(result);
+    });
+    console.log("executed ddev restart");
+    return callback;
 };
 
 function drop_db(callback) {
@@ -28,7 +42,7 @@ function drop_db(callback) {
 
 function web_install() {
     doit = async function doit() {
-        const browser = await puppeteer.launch({headless: false});
+        const browser = await puppeteer.launch({headless: true});
         const page = await browser.newPage();
         page.setDefaultTimeout(0);
         console.log("beginning of web install");
@@ -47,13 +61,27 @@ function web_install() {
         await page.waitForSelector('[id="edit-site-name"]');
         browser.close();
         console.timeEnd("installtime");
-
     }
     doit();
 };
 
-async.series([drop_db, web_install], function (err, results) {
-    console.log(results);
-});
+async.series([
+    function (callback) {
+        exec('cd ' + sitedir + ' && ddev mysql -e "DROP DATABASE IF EXISTS db; CREATE DATABASE db;"', function (error, stdout, stderr) {
+            console.log(stdout);
+            console.log(stderr);
+        });
+        console.log("completed drop database");
+        callback(null, 'completed drop db');
+    },
+    function (callback) {
+        // then do another async task
+        console.log("starting web install");
+
+        web_install(null, 'two');
+        console.log("completed web install");
+        callback(null, 'completed web install');
+    }
+]);
 
 
