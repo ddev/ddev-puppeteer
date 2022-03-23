@@ -1,6 +1,7 @@
 // Must npm install async
 
 var site= "https://d9junk.ddev.site/";
+var sitedir = "/Users/rfay/workspace/d9junk"
 
 const puppeteer = require('puppeteer');
 
@@ -15,7 +16,7 @@ function execute(command, callback) {
 
 function drop_db(callback) {
     execute('dropdb d9install', function (result) {
-        exec('cd /Users/rfay/workspace/d9junk && ddev mysql -e "DROP DATABASE IF EXISTS db; CREATE DATABASE db;"', function (error, stdout, stderr) {
+        exec('cd ' + sitedir + ' && ddev mysql -e "DROP DATABASE IF EXISTS db; CREATE DATABASE db;"', function (error, stdout, stderr) {
             console.log(stdout);
             console.log(stderr);
         });
@@ -27,7 +28,6 @@ function drop_db(callback) {
 
 function web_install() {
     doit = async function doit() {
-
         const browser = await puppeteer.launch({headless: false});
         const page = await browser.newPage();
         page.setDefaultTimeout(0);
