@@ -12,7 +12,7 @@ function execute(command, callback) {
 
 function drop_db(callback) {
     execute('dropdb d9install', function (result) {
-        exec('cd /Users/rfay/workspace/d9junk && ddev drush sql-drop -y', function (error, stdout, stderr) {
+        exec('cd /Users/rfay/workspace/d9junk && ddev mysql -e "DROP DATABASE IF EXISTS db; CREATE DATABASE db;"', function (error, stdout, stderr) {
             console.log(stdout);
             console.log(stderr);
         });
@@ -25,20 +25,27 @@ function drop_db(callback) {
 function web_install() {
     doit = async function doit() {
         console.log("beginning of puppeteer");
+        console.time("installtime");
+
         const browser = await puppeteer.launch({headless: false});
         const page = await browser.newPage();
         page.setDefaultTimeout(0); // 60 seconds
 
         await page.goto('https://d9junk.ddev.site/core/install.php');
-        await page.screenshot({path: 'start.png'});
-        console.log("screenshot taken")
+        // await page.screenshot({path: 'start.png'});
+        // console.log("screenshot taken")
         await page.waitForSelector('[id="edit-langcode"]');
         await page.click('[id="edit-submit"]');
         await page.waitForNavigation();
+        await page.waitForSelector('[id="edit-profile"]');
+        await page.click('[id="edit-submit"]');
+        await page.waitForNavigation();
+
         await page.waitForSelector('[id="edit-site-name"]');
-        await page.screenshot({path: 'done.png'});
+        // await page.screenshot({path: 'done.png'});
         browser.close();
-        return "done with puppeteer";
+        console.timeEnd("installtime");
+
     }
     doit();
 };
