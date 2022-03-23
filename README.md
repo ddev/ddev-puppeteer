@@ -5,6 +5,7 @@ This tries to use a DDEV Drupal 9 project as a measure of performance using a we
 
 * To use this, you need nodejs, `npm init && npm i puppeteer async`.
 * The project named in ddev-puppeteer.js should be a standard Drupal 9 install as per the [DDEV drupal 9 quickstart](https://ddev.readthedocs.io/en/latest/users/cli-usage/#drupal-9-composer-setup-example)
+* Edit `site` and `sitedir` in ddev-puppeteer.js.
 * Set up the project with mutagen or colima or whatever permutation you like.
 * The project should already be running.
 * Run the test with `node ddev-puppeteer.js`
