@@ -24,16 +24,14 @@ function drop_db(callback) {
 
 function web_install() {
     doit = async function doit() {
-        console.log("beginning of puppeteer");
-        console.time("installtime");
 
         const browser = await puppeteer.launch({headless: false});
         const page = await browser.newPage();
         page.setDefaultTimeout(0); // 60 seconds
+        console.log("beginning of web install");
+        console.time("installtime");
 
         await page.goto('https://d9junk.ddev.site/core/install.php');
-        // await page.screenshot({path: 'start.png'});
-        // console.log("screenshot taken")
         await page.waitForSelector('[id="edit-langcode"]');
         await page.click('[id="edit-submit"]');
         await page.waitForNavigation();
@@ -42,7 +40,6 @@ function web_install() {
         await page.waitForNavigation();
 
         await page.waitForSelector('[id="edit-site-name"]');
-        // await page.screenshot({path: 'done.png'});
         browser.close();
         console.timeEnd("installtime");
 
