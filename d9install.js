@@ -1,8 +1,11 @@
+// Must npm install async
+
+var site= "https://d9junk.ddev.site/";
+
 const puppeteer = require('puppeteer');
 
 var exec = require('child_process').exec;
 const async = require('async');
-console.log("really early");
 
 function execute(command, callback) {
     exec(command, function (error, stdout, stderr) {
@@ -27,11 +30,13 @@ function web_install() {
 
         const browser = await puppeteer.launch({headless: false});
         const page = await browser.newPage();
-        page.setDefaultTimeout(0); // 60 seconds
+        page.setDefaultTimeout(0);
         console.log("beginning of web install");
         console.time("installtime");
 
-        await page.goto('https://d9junk.ddev.site/core/install.php');
+        installpage = site + 'core/install.php'
+        console.log("Installing at " + installpage)
+        await page.goto(installpage);
         await page.waitForSelector('[id="edit-langcode"]');
         await page.click('[id="edit-submit"]');
         await page.waitForNavigation();
