@@ -40,10 +40,19 @@ function web_install() {
         await page.click('[id="edit-submit"]');
         await page.waitForNavigation();
         await page.waitForSelector('[id="edit-profile"]');
+        await page.click('[id="edit-profile-demo-umami"]');
         await page.click('[id="edit-submit"]');
         await page.waitForNavigation();
 
         await page.waitForSelector('[id="edit-site-name"]');
+        await page.type('[id="edit-site-mail"]', 'admin@example.com');
+        await page.type('[id="edit-site-mail"]', 'admin@example.com');
+        await page.type('[id="edit-account-name"]', 'admin');
+        await page.type('[id="edit-account-pass-pass1"]', 'admin');
+        await page.type('[id="edit-account-pass-pass2"]', 'admin');
+        await page.click('[id="edit-submit"]');
+
+        await page.waitForSelector('[id="block-umami-account-menu"]');
         browser.close();
         console.timeEnd("installtime");
     }
