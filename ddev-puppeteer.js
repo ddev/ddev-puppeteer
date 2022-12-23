@@ -2,8 +2,8 @@
 
 // Must npm install async
 
-var site = "https://d9junk.ddev.site/";
-var sitedir = "/Users/rfay/workspace/d9junk"
+var site = "https://d10perf.ddev.site/";
+var sitedir = "/Users/rfay/workspace/d10perf"
 
 const puppeteer = require('puppeteer');
 
@@ -60,7 +60,7 @@ function web_install() {
 
 async.series([
     function (callback) {
-        exec('cd ' + sitedir + ' && ddev mysql -e "DROP DATABASE IF EXISTS db; CREATE DATABASE db;" && ddev exec killall -USR2 php-fpm', function (error, stdout, stderr) {
+        exec('cd ' + sitedir + ' && rm -rf web/sites/default/files/* && ddev mutagen sync && ddev mysql -e "DROP DATABASE IF EXISTS db; CREATE DATABASE db;" && ddev exec "killall -HUP nginx && killall -USR2 php-fpm"', function (error, stdout, stderr) {
             console.log(stdout);
             console.log(stderr);
         });
