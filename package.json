@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "async": "^3.2.3",
-    "puppeteer": "^13.5.1"
+    "async": "^3.2.4",
+    "puppeteer": "^13.7.0"
   }
 }
