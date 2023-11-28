@@ -24,7 +24,7 @@ function execute(command, callback) {
 
 function web_install() {
     doit = async function doit() {
-        const browser = await puppeteer.launch({headless: true});
+        const browser = await puppeteer.launch({headless: false});
         const page = await browser.newPage();
         page.setDefaultTimeout(0);
         console.log("Waiting for setup work to be done");
@@ -38,11 +38,11 @@ function web_install() {
         await page.goto(installpage);
         await page.waitForSelector('[id="edit-langcode"]');
         await page.click('[id="edit-submit"]');
-        await page.waitForNavigation();
-        await page.waitForSelector('[id="edit-profile"]');
+        await page.waitForSelector('[id="edit-profile-demo-umami"]');
         await page.click('[id="edit-profile-demo-umami"]');
         await page.click('[id="edit-submit"]');
-        await page.waitForNavigation();
+        await page.waitForSelector('[id="edit-save"]');
+        await page.click('[id="edit-save"]');
 
         await page.waitForSelector('[id="edit-site-name"]');
         await page.type('[id="edit-site-mail"]', 'admin@example.com');
