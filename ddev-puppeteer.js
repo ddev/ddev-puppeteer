@@ -24,7 +24,7 @@ function execute(command, callback) {
 
 function web_install() {
     doit = async function doit() {
-        const browser = await puppeteer.launch({headless: false});
+        const browser = await puppeteer.launch({headless: true});
         const page = await browser.newPage();
         page.setDefaultTimeout(0);
         console.log("Waiting for setup work to be done");
