@@ -1,4 +1,4 @@
-// Do a simple Drupal 9 install
+// Do a simple Drupal 10 install
 
 // Must npm install async
 
