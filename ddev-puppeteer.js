@@ -1,6 +1,8 @@
 // Do a simple Drupal 10 install
+// To run on your project, change `site` and `sitedir` below
+// Contributions welcome.
 
-// Must npm install async
+// Must npm install to start
 
 var site = "https://d10perf.ddev.site/";
 var sitedir = "/Users/rfay/workspace/d10perf"
