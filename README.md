@@ -2,10 +2,11 @@
 
 Simple Puppeteer script for measuring DDEV performance.
 
-This tries to use a DDEV Drupal 10 project as a measure of performance using a web install of the `demo_umami` profile.
+This tries to use a DDEV Drupal 11 project as a measure of performance using a web install of the `demo_umami` profile.
 
 * To use this, you need Node.js, `npm init && npm i puppeteer async`.
-* The project named in `ddev-puppeteer.js` should be a standard Drupal 10 install as per the [DDEV Drupal 10 quickstart](https://ddev.readthedocs.io/en/latest/users/quickstart/#drupal)
+* On Apple Silicon, use [this article](https://www.broddin.be/fixing-the-chromium-binary-is-not-available-for-arm64/) to install arm64 chromium.
+* The project named in `ddev-puppeteer.js` should be a standard Drupal 11 install as per the [DDEV Drupal 11 quickstart](https://ddev.readthedocs.io/en/latest/users/quickstart/#drupal)
 * Edit `site` and `sitedir` in `ddev-puppeteer.js`.
 * Set up the project with Mutagen or Colima or whatever permutation you like.
 * The project should already be running.
