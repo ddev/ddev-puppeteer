@@ -4,8 +4,8 @@
 
 // Must npm install to start
 
-var site = "https://d10perf.ddev.site/";
-var sitedir = "/Users/rfay/workspace/d10perf"
+var site = "https://d11.ddev.site/";
+var sitedir = "/Users/rfay/workspace/d11"
 
 const puppeteer = require('puppeteer');
 
